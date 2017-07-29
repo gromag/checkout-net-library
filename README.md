@@ -60,9 +60,9 @@ There are various API endpoints that the **APIClient** interacts with.
 - Cards
 - Tokens
 
-####Charges
+#### Charges
 
-#####Charge with card example
+##### Charge with card example
 ```
 // Create payload
 var cardChargeRequestModel = new CardCharge()
@@ -157,8 +157,8 @@ catch (Exception e)
 ```
 
 
-####Customers
-#####Create customer with card example
+#### Customers
+##### Create customer with card example
 ```
 // Create payload
 var customerCreateRequest = new CustomerCreate()
@@ -221,8 +221,8 @@ catch (Exception e)
 }
 ```
 
-####Cards
-#####Create card
+#### Cards
+##### Create card
 ```
 // Create payload
 var cardCreateRequest = new CardCreate()
@@ -274,8 +274,8 @@ catch (Exception e)
 }
 ```
 
-####Tokens
-#####Create payment token example
+#### Tokens
+##### Create payment token example
 
 ```
 // Create payload
@@ -348,7 +348,7 @@ catch (Exception e)
 }
 ```
 
-#####Verify charge example
+##### Verify charge example
 
 ```
 // Create payload
