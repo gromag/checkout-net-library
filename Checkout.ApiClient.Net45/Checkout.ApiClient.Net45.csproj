@@ -41,9 +41,8 @@
     <AppConfig>App.$(Configuration).config</AppConfig>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -53,6 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiServices\Cards\CardService.cs" />
+    <Compile Include="ApiServices\Baskets\BasketService.cs" />
+    <Compile Include="ApiServices\Baskets\ResponseModels\Basket.cs" />
+    <Compile Include="ApiServices\Baskets\RequestModels\Item.cs" />
+    <Compile Include="ApiServices\Baskets\ResponseModels\Item.cs" />
     <Compile Include="ApiServices\Charges\ChargeService.cs" />
     <Compile Include="ApiServices\Charges\RequestModels\BaseChargeInfo.cs" />
     <Compile Include="ApiServices\Charges\RequestModels\ChargeVoid.cs" />

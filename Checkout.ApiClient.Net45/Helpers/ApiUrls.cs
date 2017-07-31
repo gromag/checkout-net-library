@@ -37,6 +37,13 @@
         private static string _recurringCustomerPaymentPlanApiUri;
         private static string _visaCheckout;
 
+        private static string _basketNewApiUrl;
+        private static string _basketAddItemApiUrl;
+        private static string _basketUpdateItemApiUrl;
+        private static string _basketGetApiUrl;
+        private static string _basketGetItemApiUrl;
+        private static string _basketDeleteItemApiUrl;
+
         public static void ResetApiUrls()
         {
             _cardTokensApiUri = null;
@@ -68,6 +75,13 @@
             _recurringCustomerPaymentPlanSearchApiUri = null;
             _recurringCustomerPaymentPlanApiUri = null;
             _localPaymentChargesApiUri = null;
+
+            _basketNewApiUrl = null;
+            _basketAddItemApiUrl = null;
+            _basketUpdateItemApiUrl = null;
+            _basketGetApiUrl = null;
+            _basketGetItemApiUrl = null;
+            _basketDeleteItemApiUrl = null;
         }
 
         public static string Charges
@@ -182,5 +196,23 @@
                 _recurringCustomerPaymentPlanApiUri ??
                 (_recurringCustomerPaymentPlanApiUri =
                     string.Concat(AppSettings.BaseApiUri, "/recurringPayments/customers/{0}"));
+
+        public static string BasketCreateNew
+            => _basketNewApiUrl ?? (_basketNewApiUrl = string.Concat(AppSettings.BaseApiUri, "/cart/new"));
+
+        public static string BasketAddNewItem
+            => _basketAddItemApiUrl ?? (_basketAddItemApiUrl = string.Concat(AppSettings.BaseApiUri, "/cart/{0}"));
+
+        public static string BasketUpdateItem
+            => _basketUpdateItemApiUrl ?? (_basketUpdateItemApiUrl = string.Concat(AppSettings.BaseApiUri, "/cart/{0}"));
+
+        public static string BasketGet
+            => _basketGetApiUrl ?? (_basketGetApiUrl = string.Concat(AppSettings.BaseApiUri, "/cart/{0}"));
+
+        public static string BasketGetItem
+            => _basketGetItemApiUrl ?? (_basketGetItemApiUrl = string.Concat(AppSettings.BaseApiUri, "/cart/{0}/{1}"));
+
+        public static string BasketDeleteItem
+            => _basketDeleteItemApiUrl ?? (_basketDeleteItemApiUrl = string.Concat(AppSettings.BaseApiUri, "/cart/{0}/{1}"));
     }
 }

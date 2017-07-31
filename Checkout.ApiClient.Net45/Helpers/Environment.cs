@@ -8,6 +8,6 @@ namespace Checkout.Helpers
 {
     public enum Environment
     {
-        Undefined,Sandbox, Live
+        Undefined,Sandbox, Live, Localhost
     }
 }

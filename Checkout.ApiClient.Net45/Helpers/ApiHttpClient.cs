@@ -184,7 +184,7 @@ namespace Checkout
 
                 var responseContent = responseMessage.Content.ReadAsByteArrayAsync().Result;
 
-                if (responseContent != null && responseContent.Length > 0)
+                if (responseContent != null)
                 {
                     responseAsString = Encoding.UTF8.GetString(responseContent);
 
@@ -219,7 +219,7 @@ namespace Checkout
 
         private HttpResponse<T> CreateHttpResponse<T>(string responseAsString, HttpStatusCode httpStatusCode)
         {
-            if (httpStatusCode == HttpStatusCode.OK && responseAsString != null)
+            if (httpStatusCode == HttpStatusCode.OK || httpStatusCode == HttpStatusCode.Created && responseAsString != null)
             {
                 return new HttpResponse<T>(GetResponseAsObject<T>(responseAsString))
                 {
