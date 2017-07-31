@@ -63,34 +63,34 @@ namespace Tests
             customer.ShouldBeEquivalentTo(response.Model);
         }
 
-        [Test]
-        public void GetCustomerList()
-        {
-            var startTime = DateTime.UtcNow.AddHours(-1); // records for the past hour
+        //[Test]
+        //public void GetCustomerList()
+        //{
+        //    var startTime = DateTime.UtcNow.AddHours(-1); // records for the past hour
 
-            var customer1 = CheckoutClient.CustomerService.CreateCustomer(TestHelper.GetCustomerCreateModelWithCard());
-            var customer2 = CheckoutClient.CustomerService.CreateCustomer(TestHelper.GetCustomerCreateModelWithCard());
-            var customer3 = CheckoutClient.CustomerService.CreateCustomer(TestHelper.GetCustomerCreateModelWithCard());
-            var customer4 = CheckoutClient.CustomerService.CreateCustomer(TestHelper.GetCustomerCreateModelWithCard());
+        //    var customer1 = CheckoutClient.CustomerService.CreateCustomer(TestHelper.GetCustomerCreateModelWithCard());
+        //    var customer2 = CheckoutClient.CustomerService.CreateCustomer(TestHelper.GetCustomerCreateModelWithCard());
+        //    var customer3 = CheckoutClient.CustomerService.CreateCustomer(TestHelper.GetCustomerCreateModelWithCard());
+        //    var customer4 = CheckoutClient.CustomerService.CreateCustomer(TestHelper.GetCustomerCreateModelWithCard());
 
-            var custGetListRequest = new CustomerGetList
-            {
-                FromDate = startTime,
-                ToDate = DateTime.UtcNow
-            };
+        //    var custGetListRequest = new CustomerGetList
+        //    {
+        //        FromDate = startTime,
+        //        ToDate = DateTime.UtcNow
+        //    };
 
-            //Get all customers created
-            var response = CheckoutClient.CustomerService.GetCustomerList(custGetListRequest);
+        //    //Get all customers created
+        //    var response = CheckoutClient.CustomerService.GetCustomerList(custGetListRequest);
 
-            response.Should().NotBeNull();
-            response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
-            response.Model.Count.Should().BeGreaterOrEqualTo(4);
+        //    response.Should().NotBeNull();
+        //    response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
+        //    response.Model.Count.Should().BeGreaterOrEqualTo(4);
 
-            response.Model.Data[0].Id.Should().Be(customer4.Model.Id);
-            response.Model.Data[1].Id.Should().Be(customer3.Model.Id);
-            response.Model.Data[2].Id.Should().Be(customer2.Model.Id);
-            response.Model.Data[3].Id.Should().Be(customer1.Model.Id);
-        }
+        //    response.Model.Data[0].Id.Should().Be(customer4.Model.Id);
+        //    response.Model.Data[1].Id.Should().Be(customer3.Model.Id);
+        //    response.Model.Data[2].Id.Should().Be(customer2.Model.Id);
+        //    response.Model.Data[3].Id.Should().Be(customer1.Model.Id);
+        //}
 
         [Test]
         public void UpdateCustomer()

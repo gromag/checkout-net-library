@@ -136,73 +136,73 @@ namespace Tests
             response.Model.ResponseCode.Should().NotBeNullOrEmpty();
         }
 
-        [Test]
-        public void CreateChargeWithCardToken()
-        {
-            var cardToken = "card_tok_34FF74EC-5E8A-41CD-A7FF-8992F54DAA9F"; // card token for the JS charge
+        //[Test]
+        //public void CreateChargeWithCardToken()
+        //{
+        //    var cardToken = "card_tok_34FF74EC-5E8A-41CD-A7FF-8992F54DAA9F"; // card token for the JS charge
 
-            var cardTokenChargeModel = TestHelper.GetCardTokenChargeCreateModel(cardToken, TestHelper.RandomData.Email);
+        //    var cardTokenChargeModel = TestHelper.GetCardTokenChargeCreateModel(cardToken, TestHelper.RandomData.Email);
 
-            var response = CheckoutClient.ChargeService.ChargeWithCardToken(cardTokenChargeModel);
+        //    var response = CheckoutClient.ChargeService.ChargeWithCardToken(cardTokenChargeModel);
 
-            ////Check if charge details match
-            response.Should().NotBeNull();
-            response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
-            response.Model.Id.Should().StartWith("charge_");
+        //    ////Check if charge details match
+        //    response.Should().NotBeNull();
+        //    response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
+        //    response.Model.Id.Should().StartWith("charge_");
 
-            response.Model.AutoCapTime.Should().Be(cardTokenChargeModel.AutoCapTime);
-            response.Model.AutoCapture.Should().BeEquivalentTo(cardTokenChargeModel.AutoCapture);
-            response.Model.Email.Should().BeEquivalentTo(cardTokenChargeModel.Email);
-            response.Model.Currency.Should().BeEquivalentTo(cardTokenChargeModel.Currency);
-            response.Model.Description.Should().BeEquivalentTo(cardTokenChargeModel.Description);
-            response.Model.Value.Should().Be(cardTokenChargeModel.Value);
-            response.Model.Status.Should().NotBeNullOrEmpty();
-            response.Model.AuthCode.Should().NotBeNullOrEmpty();
-            response.Model.ResponseCode.Should().NotBeNullOrEmpty();
-        }
+        //    response.Model.AutoCapTime.Should().Be(cardTokenChargeModel.AutoCapTime);
+        //    response.Model.AutoCapture.Should().BeEquivalentTo(cardTokenChargeModel.AutoCapture);
+        //    response.Model.Email.Should().BeEquivalentTo(cardTokenChargeModel.Email);
+        //    response.Model.Currency.Should().BeEquivalentTo(cardTokenChargeModel.Currency);
+        //    response.Model.Description.Should().BeEquivalentTo(cardTokenChargeModel.Description);
+        //    response.Model.Value.Should().Be(cardTokenChargeModel.Value);
+        //    response.Model.Status.Should().NotBeNullOrEmpty();
+        //    response.Model.AuthCode.Should().NotBeNullOrEmpty();
+        //    response.Model.ResponseCode.Should().NotBeNullOrEmpty();
+        //}
 
-        [Test]
-        public void CreateChargeWithCustomerDefaultCard()
-        {
-            var customer =
-                CheckoutClient.CustomerService.CreateCustomer(
-                    TestHelper.GetCustomerCreateModelWithCard(CardProvider.Mastercard)).Model;
+        //[Test]
+        //public void CreateChargeWithCustomerDefaultCard()
+        //{
+        //    var customer =
+        //        CheckoutClient.CustomerService.CreateCustomer(
+        //            TestHelper.GetCustomerCreateModelWithCard(CardProvider.Mastercard)).Model;
 
-            var baseChargeModel = TestHelper.GetCustomerDefaultCardChargeCreateModel(customer.Id);
-            var response = CheckoutClient.ChargeService.ChargeWithDefaultCustomerCard(baseChargeModel);
+        //    var baseChargeModel = TestHelper.GetCustomerDefaultCardChargeCreateModel(customer.Id);
+        //    var response = CheckoutClient.ChargeService.ChargeWithDefaultCustomerCard(baseChargeModel);
 
-            ////Check if charge details match
-            response.Should().NotBeNull();
-            response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
-            response.Model.Id.Should().StartWith("charge_");
+        //    ////Check if charge details match
+        //    response.Should().NotBeNull();
+        //    response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
+        //    response.Model.Id.Should().StartWith("charge_");
 
-            response.Model.AutoCapTime.Should().Be(baseChargeModel.AutoCapTime);
-            response.Model.AutoCapture.Should().BeEquivalentTo(baseChargeModel.AutoCapture);
-            response.Model.Currency.Should().BeEquivalentTo(baseChargeModel.Currency);
-            response.Model.Description.Should().BeEquivalentTo(baseChargeModel.Description);
-            response.Model.Value.Should().Be(baseChargeModel.Value);
-            response.Model.Email.Should().NotBeNullOrEmpty();
-            response.Model.Status.Should().NotBeNullOrEmpty();
-            response.Model.AuthCode.Should().NotBeNullOrEmpty();
-            response.Model.ResponseCode.Should().NotBeNullOrEmpty();
-        }
+        //    response.Model.AutoCapTime.Should().Be(baseChargeModel.AutoCapTime);
+        //    response.Model.AutoCapture.Should().BeEquivalentTo(baseChargeModel.AutoCapture);
+        //    response.Model.Currency.Should().BeEquivalentTo(baseChargeModel.Currency);
+        //    response.Model.Description.Should().BeEquivalentTo(baseChargeModel.Description);
+        //    response.Model.Value.Should().Be(baseChargeModel.Value);
+        //    response.Model.Email.Should().NotBeNullOrEmpty();
+        //    response.Model.Status.Should().NotBeNullOrEmpty();
+        //    response.Model.AuthCode.Should().NotBeNullOrEmpty();
+        //    response.Model.ResponseCode.Should().NotBeNullOrEmpty();
+        //}
 
-        [Test]
-        public void CreateChargeWithLocalPayment()
-        {
-            var paymentTokenCreateModel = TestHelper.GetPaymentTokenCreateModel(TestHelper.RandomData.Email, 3, "EUR");
-            var paymentToken = CheckoutClient.TokenService.CreatePaymentToken(paymentTokenCreateModel);
+        //[Test]
+        //public void CreateChargeWithLocalPayment()
+        //{
+        //    var paymentTokenCreateModel = TestHelper.GetPaymentTokenCreateModel(TestHelper.RandomData.Email, 3, "EUR");
+        //    var paymentToken = CheckoutClient.TokenService.CreatePaymentToken(paymentTokenCreateModel);
 
-            var localPaymentCharge = TestHelper.GetLocalPaymentChargeModel(paymentToken.Model.Id);
-            var chargeResponse = CheckoutClient.ChargeService.ChargeWithLocalPayment(localPaymentCharge);
+        //    var localPaymentCharge = TestHelper.GetLocalPaymentChargeModel(paymentToken.Model.Id);
+        //    var chargeResponse = CheckoutClient.ChargeService.ChargeWithLocalPayment(localPaymentCharge);
 
-            chargeResponse.Should().NotBeNull();
-            chargeResponse.HttpStatusCode.Should().Be(HttpStatusCode.OK);
-            chargeResponse.Model.Id.Should().StartWith("pay_tok_");
-            chargeResponse.Model.ResponseCode.Should().Be("10000");
-            chargeResponse.Model.ChargeMode.Should().Be(3);
-            chargeResponse.Model.LocalPayment.PaymentUrl.Should().NotBeNullOrWhiteSpace();
-        }
+        //    chargeResponse.Should().NotBeNull();
+        //    chargeResponse.HttpStatusCode.Should().Be(HttpStatusCode.OK);
+        //    chargeResponse.Model.Id.Should().StartWith("pay_tok_");
+        //    chargeResponse.Model.ResponseCode.Should().Be("10000");
+        //    chargeResponse.Model.ChargeMode.Should().Be(3);
+        //    chargeResponse.Model.LocalPayment.PaymentUrl.Should().NotBeNullOrWhiteSpace();
+        //}
 
         [Test]
         public void GetCharge()
@@ -310,18 +310,18 @@ namespace Tests
             response.Model.Message.Should().BeEquivalentTo("Ok");
         }
 
-        [Test]
-        public void VerifyChargeByPaymentToken()
-        {
-            var paymentToken = "pay_tok_cacdc3d0-f912-4ebb-9f84-8fde65e05fbd"; // payment token for the JS charge
+        //[Test]
+        //public void VerifyChargeByPaymentToken()
+        //{
+        //    var paymentToken = "pay_tok_cacdc3d0-f912-4ebb-9f84-8fde65e05fbd"; // payment token for the JS charge
 
-            var response = CheckoutClient.ChargeService.VerifyCharge(paymentToken);
+        //    var response = CheckoutClient.ChargeService.VerifyCharge(paymentToken);
 
-            //Check if charge details match
-            response.Should().NotBeNull();
-            response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
-            response.Model.Id.Should().StartWith("charge_");
-        }
+        //    //Check if charge details match
+        //    response.Should().NotBeNull();
+        //    response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
+        //    response.Model.Id.Should().StartWith("charge_");
+        //}
 
         [Test]
         public void VoidCharge()

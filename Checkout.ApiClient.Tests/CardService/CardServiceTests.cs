@@ -29,19 +29,19 @@ namespace Tests
             cardCreateModel.BillingDetails.ShouldBeEquivalentTo(response.Model.BillingDetails);
         }
 
-        [Test]
-        public void DeleteCard()
-        {
-            var customer =
-                CheckoutClient.CustomerService.CreateCustomer(TestHelper.GetCustomerCreateModelWithCard()).Model;
-            var customerCardId = customer.Cards.Data.First().Id;
+        //[Test]
+        //public void DeleteCard()
+        //{
+        //    var customer =
+        //        CheckoutClient.CustomerService.CreateCustomer(TestHelper.GetCustomerCreateModelWithCard()).Model;
+        //    var customerCardId = customer.Cards.Data.First().Id;
 
-            var response = CheckoutClient.CardService.DeleteCard(customer.Id, customerCardId);
+        //    var response = CheckoutClient.CardService.DeleteCard(customer.Id, customerCardId);
 
-            response.Should().NotBeNull();
-            response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
-            response.Model.Message.Should().BeEquivalentTo("Ok");
-        }
+        //    response.Should().NotBeNull();
+        //    response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
+        //    response.Model.Message.Should().BeEquivalentTo("Ok");
+        //}
 
         [Test]
         public void GetCard()
@@ -64,23 +64,23 @@ namespace Tests
             customerCard.BillingDetails.ShouldBeEquivalentTo(response.Model.BillingDetails);
         }
 
-        [Test]
-        public void GetCardList()
-        {
-            var customer =
-                CheckoutClient.CustomerService.CreateCustomer(TestHelper.GetCustomerCreateModelWithNoCard()).Model;
-            var customerCard1 =
-                CheckoutClient.CardService.CreateCard(customer.Id, TestHelper.GetCardCreateModel()).Model;
-            var customerCard2 =
-                CheckoutClient.CardService.CreateCard(customer.Id,
-                    TestHelper.GetCardCreateModel(CardProvider.Mastercard)).Model;
+        //[Test]
+        //public void GetCardList()
+        //{
+        //    var customer =
+        //        CheckoutClient.CustomerService.CreateCustomer(TestHelper.GetCustomerCreateModelWithNoCard()).Model;
+        //    var customerCard1 =
+        //        CheckoutClient.CardService.CreateCard(customer.Id, TestHelper.GetCardCreateModel()).Model;
+        //    var customerCard2 =
+        //        CheckoutClient.CardService.CreateCard(customer.Id,
+        //            TestHelper.GetCardCreateModel(CardProvider.Mastercard)).Model;
 
-            var response = CheckoutClient.CardService.GetCardList(customer.Id);
+        //    var response = CheckoutClient.CardService.GetCardList(customer.Id);
 
-            response.Should().NotBeNull();
-            response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
-            response.Model.Count.Should().Be(2);
-        }
+        //    response.Should().NotBeNull();
+        //    response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
+        //    response.Model.Count.Should().Be(2);
+        //}
 
         [Test]
         public void UpdateCard()
